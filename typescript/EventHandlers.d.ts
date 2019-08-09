@@ -561,4 +561,27 @@ declare module "react-native-voximplant" {
         * */
         text: string
     }
+    export interface RemoteVideoStreamAdded {
+
+        /*
+        * Call which endpoint belongs to
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Endpoint that triggered the event
+        * */
+        endpoint: Voximplant.Endpoint,
+
+        /*
+        * Name of the event
+        * */
+        name: string,
+
+        /*
+        * Remote video stream added
+        * */
+        videoStream: Voximplant.VideoStream
+
+    }
 }
