@@ -3,7 +3,7 @@ declare module "react-native-voximplant" {
         /*
          * Enum of log levels.
          * @remarks IOS ONLY
-         * @default LogLevel.INFO
+         * @default {@link LogLevel.INFO}
          * */
         export enum LogLevel {
             /*
