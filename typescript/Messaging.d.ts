@@ -207,7 +207,7 @@ declare module "react-native-voximplant" {
     namespace Voximplant {
         namespace Messaging {
 
-            type MessengerEventTypesMaps = {
+            type MessengerEventTypesMap = {
                 [MessengerEventTypes.CreateConversation]: ConversationEvent,
                 [MessengerEventTypes.EditConversation]: ConversationEvent,
                 [MessengerEventTypes.EditMessage]: MessageEvent,
@@ -460,7 +460,7 @@ declare module "react-native-voximplant" {
                  * @param {Voximplant.Messaging.MessengerEventTypes} eventType
                  * @param {function} handler - Handler function. If not specified, all handlers for the event type will be removed.
                  */
-                off<T extends keyof MessengerEventTypes>(eventType: T, handler: (event: MessengerEventTypes[T]) => void): void;
+                off<T extends keyof MessengerEventTypesMap>(eventType: T, handler: (event: MessengerEventTypesMap[T]) => void): void;
 
                 /**
                  * Register handler for specified messenger event.
@@ -469,7 +469,7 @@ declare module "react-native-voximplant" {
                  * @param {Voximplant.Messaging.MessengerEventTypes} eventType
                  * @param {function} handler
                  */
-                on<T extends keyof MessengerEventTypes>(eventType: T, handler: (event: MessengerEventTypes[T]) => void): void;
+                on<T extends keyof MessengerEventTypesMap>(eventType: T, handler: (event: MessengerEventTypesMap[T]) => void): void;
 
                 /**
                  * Set the current user status.
