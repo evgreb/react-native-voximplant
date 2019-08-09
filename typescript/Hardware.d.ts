@@ -74,7 +74,7 @@ declare module "react-native-voximplant" {
                 /**
                  * Get AudioDeviceManager instance to control audio hardware settings
                  */
-                getInstance(): AudioDeviceManager;
+                static getInstance(): AudioDeviceManager;
 
                 /**
                  * Remove a handler for the specified AudioDeviceManager event.
@@ -108,7 +108,7 @@ declare module "react-native-voximplant" {
                 /**
                  * Get CameraManager instance to control camera hardware settings
                  */
-                getInstance(): CameraManager;
+                static getInstance(): CameraManager;
 
                 /**
                  * Remove a handler for the specified camera event.
