@@ -7,6 +7,13 @@ declare module "react-native-voximplant" {
                 [AudioDeviceEvents.DeviceListChanged]: DeviceListChanged
             }
 
+            type CameraEventsMap = {
+                [CameraEvents.CameraDisconnected]: CameraDisconnected,
+                [CameraEvents.CameraError]: CameraError,
+                [CameraEvents.CameraSwitchDone]: CameraSwitchDone,
+                [CameraEvents.CameraSwitchError]: CameraSwitchError
+            }
+
             /**
              * Class may be used to manage audio devices, i.e. see current active device,
              * select another active device and get the list of available devices.
@@ -21,14 +28,14 @@ declare module "react-native-voximplant" {
                  * 2. the provider performs [the specified answer call action](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1648270-provider?language=objc)
                  * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
                  */
-                callKitConfigureAudioSession(): void
+                callKitConfigureAudioSession(): void;
 
                 /**
                  *
                  * Restores default AVAudioSession initialization routines, MUST be called if CallKit becomes disabled.
                  * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
                  */
-                callKitReleaseAudioSession(): void
+                callKitReleaseAudioSession(): void;
 
                 /**
                  *
@@ -40,7 +47,7 @@ declare module "react-native-voximplant" {
                  *
                  * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
                  */
-                callKitStartAudio(): void
+                callKitStartAudio(): void;
 
                 /**
                  *
@@ -52,29 +59,29 @@ declare module "react-native-voximplant" {
                  *
                  * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
                  */
-                callKitStopAudio(): void
+                callKitStopAudio(): void;
 
                 /**
                  * Returns active audio device during the call or audio device that will be used for a call if there is no calls at this moment.
                  */
-                getActiveDevice(): Promise<AudioDevice>
+                getActiveDevice(): Promise<AudioDevice>;
 
                 /**
                  * Returns the list of available audio devices.
                  */
-                getAudioDevices(): Promise<Array<AudioDevice>>
+                getAudioDevices(): Promise<Array<AudioDevice>>;
 
                 /**
                  * Get AudioDeviceManager instance to control audio hardware settings
                  */
-                getInstance(): AudioDeviceManager
+                getInstance(): AudioDeviceManager;
 
                 /**
                  * Remove a handler for the specified AudioDeviceManager event.
                  * @param {Voximplant.Hardware.AudioDeviceEvents} event
                  * @param {function} handler - Handler function. If not specified, all handlers for the event will be removed.
                  */
-                off<T extends keyof AudioDeviceEventsMap>(event: T, handler: (event: AudioDeviceEventsMap[T]) => void): void
+                off<T extends keyof AudioDeviceEventsMap>(event: T, handler: (event: AudioDeviceEventsMap[T]) => void): void;
 
                 /**
                  * Register a handler for the specified AudioDeviceManager event.
@@ -83,14 +90,56 @@ declare module "react-native-voximplant" {
                  * @param {Voximplant.Hardware.AudioDeviceEvents} event
                  * @param {function} handler
                  */
-                on<T extends keyof AudioDeviceEventsMap>(event: T, handler: (event: AudioDeviceEventsMap[T]) => void): void
+                on<T extends keyof AudioDeviceEventsMap>(event: T, handler: (event: AudioDeviceEventsMap[T]) => void): void;
 
                 /**
                  * Changes selection of the current active audio device. Please see {@link https://voximplant.com/docs/references/androidsdk/iaudiodevicemanager Android}
                  * and {@link https://voximplant.com/docs/references/iossdk/viaudiomanager#selectaudiodevice iOS} documentation for platform specific.
                  * @param {Voximplant.Hardware.AudioDevice} audioDevice - Preferred audio device to use.
                  */
-                selectAudioDevice(audioDevice: AudioDevice): void
+                selectAudioDevice(audioDevice: AudioDevice): void;
+            }
+
+            /**
+             * Class that may be used to manage cameras on a device.
+             */
+            export class CameraManager {
+
+                /**
+                 * Get CameraManager instance to control camera hardware settings
+                 */
+                getInstance(): CameraManager;
+
+                /**
+                 * Remove a handler for the specified camera event.
+                 * @param {Voximplant.Hardware.CameraEvents} event
+                 * @param {function} handler - Handler function. If not specified, all handlers for the event will be removed.
+                 * @remarks ANDROID ONLY
+                 */
+                off<T extends keyof CameraEventsMap>(event: T, handler: (event: CameraEventsMap[T]) => void): void;
+
+                /**
+                 * Register a handler for the specified camera event.
+                 * One event can have more than one handler.
+                 * Use the {@link CameraManager#off} method to delete a handler. ANDROID ONLY.
+                 * @param {Voximplant.Hardware.CameraEvents} event
+                 * @param {function} handler
+                 *
+                 */
+                on<T extends keyof CameraEventsMap>(event: T, handler: (event: CameraEventsMap[T]) => void): void;
+
+                /**
+                 * Set a local camera resolution
+                 * @param {number} width - Camera resolution width
+                 * @param {number} height - Camera resolution height
+                 */
+                setCameraResolution(width: number, height: number): void;
+
+                /**
+                 * Select camera
+                 * @param {Voximplant.Hardware.CameraType} cameraType - Preferred video camera
+                 */
+                switchCamera(cameraType: CameraType): void;
             }
 
             /*
