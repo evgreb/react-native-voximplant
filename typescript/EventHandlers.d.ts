@@ -544,4 +544,21 @@ declare module "react-native-voximplant" {
         * */
         timestamp: number
     }
+    export interface MessageReceived {
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Name of the event
+        * */
+        name: string,
+
+        /*
+        * Content of the message
+        * */
+        text: string
+    }
 }
