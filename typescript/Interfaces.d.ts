@@ -1,6 +1,4 @@
 /// <reference path="Enums.d.ts" />
-import { Voximplant } from "react-native-voximplant";
-
 declare module "react-native-voximplant" {
   export interface CallSettings {
     /*
