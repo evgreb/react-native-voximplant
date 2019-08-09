@@ -1,5 +1,6 @@
 /// <reference path="Enums.d.ts" />
 /// <reference path="Interfaces.d.ts" />
+/// <reference path="Hardware.d.ts" />
 declare module "react-native-voximplant" {
     import * as React from "react";
     import * as ReactNative from "react-native";
