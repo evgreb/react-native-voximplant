@@ -101,6 +101,19 @@ declare module "react-native-voximplant" {
         name: string
     }
     export interface CameraDisconnected {
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
+    export interface CameraError {
+
+        /*
+        * Description of error occurred
+        * */
+        error: string,
+
         /*
         * Name of the event
         * */
