@@ -677,4 +677,26 @@ declare module "react-native-voximplant" {
         * */
         online: boolean
     }
+    export interface SubscriptionEvent {
+
+        /*
+        * Action that triggered this event.
+        * */
+        action: Voximplant.MessengerAction,
+
+        /*
+        * Messenger event type.
+        * */
+        eventType: Voximplant.MessengerEventTypes,
+
+        /*
+        * The IM id for the user that initiated the event.
+        * */
+        imUserId: number,
+
+        /*
+        * Array of the IM user identifiers of the current (un)subscription.
+        * */
+        users: nubmer[]
+    }
 }
