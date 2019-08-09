@@ -404,7 +404,6 @@ declare module "react-native-voximplant" {
             ProgressToneStop = 'ProgressToneStop'
         }
 
-
         /**
          * The events that are triggered by Client instance. See {@link Voximplant#getInstance}.
          */
@@ -449,6 +448,58 @@ declare module "react-native-voximplant" {
         }
 
         /*
+         * The client states
+         * */
+        export enum ClientState {
+            /*
+             * The client is currently connected
+             * */
+            DISCONNECTED = "disconnected",
+            /*
+             * The client is currently connecting
+             * */
+            CONNECTING = "connecting",
+            /*
+             * The client is currently disconnected
+             * */
+            CONNECTED = "connected",
+            /*
+             * The client is currently logged in
+             * */
+            LOGGING_IN = "logging_in",
+            /*
+             * The client is currently logging in
+             * */
+            LOGGED_IN = "logged_in"
+        }
+
+        /**
+         * Events that are triggered when Endpoint is updated/edited, removed or started/stopped to receive stream from another Endpoint.
+        */
+        export enum EndpointEvents {
+            /**
+             * Event is triggered when endpoint information such as display name, user name and sip uri is updated.
+             * Handler function receives {@link EventHandlers.InfoUpdated} object as an argument.
+             */
+            InfoUpdated = 'InfoUpdated',
+            /**
+             * Event is triggered after endpoint added video stream to the call.
+             * Handler function receives {@link EventHandlers.RemoteVideoStreamAdded} object as an argument.
+             */
+            RemoteVideoStreamAdded = 'RemoteVideoStreamAdded',
+            /**
+             * Event is triggered after endpoint removed video stream from the call. Event is not triggered on call end.
+             * Handler function receives {@link EventHandlers.RemoteVideoStreamRemoved} object as an argument.
+             */
+            RemoteVideoStreamRemoved = 'RemoteVideoStreamRemoved',
+            /**
+             * Event is triggered when an Endpoint is removed.
+             * Handler function receives {@link EventHandlers.Removed} object as an argument.
+             */
+            Removed = 'Removed'
+        }
+
+        /*
          * Enum of log levels.
          * @remarks IOS ONLY
          * @default {@link LogLevel.INFO}
@@ -474,32 +525,6 @@ declare module "react-native-voximplant" {
              * Log verbosity level to include warning messages
              * */
             VERBOSE = "verbose"
-        }
-
-        /*
-         * The client states
-         * */
-        export enum ClientState {
-            /*
-             * The client is currently connected
-             * */
-            DISCONNECTED = "disconnected",
-            /*
-             * The client is currently connecting
-             * */
-            CONNECTING = "connecting",
-            /*
-             * The client is currently disconnected
-             * */
-            CONNECTED = "connected",
-            /*
-             * The client is currently logged in
-             * */
-            LOGGING_IN = "logging_in",
-            /*
-             * The client is currently logging in
-             * */
-            LOGGED_IN = "logged_in"
         }
 
         /*
