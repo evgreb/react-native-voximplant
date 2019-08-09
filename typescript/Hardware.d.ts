@@ -1,3 +1,4 @@
+/// <reference path="EventHandlers.d.ts" />
 declare module "react-native-voximplant" {
     namespace Voximplant {
         namespace Hardware {

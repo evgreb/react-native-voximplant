@@ -3,6 +3,7 @@
 /// <reference path="Enums.d.ts" />
 /// <reference path="VideoStream.d.ts" />
 /// <reference path="Messaging.d.ts" />
+/// <reference path="Hardware.d.ts" />
 
 declare module "react-native-voximplant" {
     export interface AuthResult {
@@ -720,6 +721,6 @@ declare module "react-native-voximplant" {
         /*
         * Object with user information
         * */
-        user: Voximplant.Messaging.User
+        user: User
     }
 }
