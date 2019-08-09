@@ -278,4 +278,26 @@ declare module "react-native-voximplant" {
         * */
         newDeviceList: Voximplant.AudioDevice[]
     }
+    export interface Disconnected {
+
+        /*
+        * True if the call was answered on another device via SIP forking, false otherwise
+        * */
+        answeredElsewhere: boolean,
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Optional SIP headers are received with the event
+        * */
+        headers: object,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
