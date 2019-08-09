@@ -7,6 +7,7 @@ declare module "react-native-voximplant" {
     import * as ReactNative from "react-native";
     namespace Voximplant {
         export function getInstance(clientConfig?: ClientConfig): Client;
+        export function getMessenger(): Messaging.Messenger;
         export const VideoView: React.ComponentType<VideoViewProps>;
 
         /*
@@ -14,7 +15,7 @@ declare module "react-native-voximplant" {
         * Can't be instantiated directly (singleton),
         * so use the {@link Voximplant#getInstance} method to get the class instance.
         * */
-        class Client {
+        export class Client {
             /**
              * Create outgoing call.
              *
