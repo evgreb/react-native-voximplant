@@ -254,4 +254,16 @@ declare module "react-native-voximplant" {
         * */
         sequence: number
     }
+    export interface DeviceChanged {
+
+        /*
+        * Audio device to be used
+        * */
+        currentDevice: Voximplant.AudioDevice,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
