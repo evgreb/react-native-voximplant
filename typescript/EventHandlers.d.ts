@@ -300,4 +300,21 @@ declare module "react-native-voximplant" {
         * */
         name: string
     }
+    export interface EndpointAdded {
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * New endpoint
+        * */
+        endpoint: Voximplant.Endpoint,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
