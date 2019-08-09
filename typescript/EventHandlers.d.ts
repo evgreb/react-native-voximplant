@@ -459,4 +459,22 @@ declare module "react-native-voximplant" {
         * */
         name: string
     }
+    export interface InfoUpdated {
+
+        /*
+        * Call which endpoint belongs to
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Endpoint that triggered the event
+        * */
+        endpoint: Voximplant.Endpoint,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+
+    }
 }
