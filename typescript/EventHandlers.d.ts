@@ -119,4 +119,16 @@ declare module "react-native-voximplant" {
         * */
         name: string
     }
+    export interface CameraSwitchDone {
+
+        /*
+        * True if new camera is front facing camera
+        * */
+        isFrontCamera: boolean,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
