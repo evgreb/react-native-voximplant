@@ -131,4 +131,16 @@ declare module "react-native-voximplant" {
         * */
         name: string
     }
+    export interface CameraSwitchError {
+
+        /*
+        * Description of error occurred.
+        * */
+        error: string,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
