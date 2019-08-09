@@ -1,6 +1,49 @@
 declare module "react-native-voximplant" {
     namespace Voximplant {
         /*
+ * Enum representing audio devices
+ * */
+        export enum AudioDevice {
+            /*
+             * Bluetooth headset
+             * */
+            BLUETOOTH = "Bluetooth",
+            /*
+             * Earpiece
+             * */
+            EARPIECE = "Earpiece",
+            /*
+             * No audio device, generally indicates that something is wrong with audio device selection.
+             * Should not be selected via {$link AudioDeviceManager.selectAudioDevice}
+             * */
+            NONE = "None",
+            /*
+             * Speaker
+             * */
+            SPEAKER = "Speaker",
+            /*
+             * Wired headset
+             * */
+            WIRED_HEADSET = "WiredHeadset"
+        }
+
+        /*
+        * Events that may be used to monitor and handle audio device change events
+        * */
+        export enum AudioDeviceEvents {
+            /**
+             * Event is triggered when active audio device or audio device that will be used for a further call is changed.
+             * Handler function receives {@link EventHandlers.DeviceChanged} object as an argument.
+             */
+            DeviceChanged     = 'DeviceChanged',
+            /**
+             * Event is triggered when a new audio device is connected or previously connected audio device is disconnected.
+             * Handler function receives {@link EventHandlers.DeviceListChanged} object as an argument.
+             */
+            DeviceListChanged = 'DeviceListChanged'
+        }
+
+        /*
          * Enum of log levels.
          * @remarks IOS ONLY
          * @default {@link LogLevel.INFO}
@@ -110,33 +153,6 @@ declare module "react-native-voximplant" {
              * Operation is not completed in time
              * */
             TIMEOUT = "TIMEOUT"
-        }
-
-        /*
-         * Enum representing audio devices
-         * */
-        export enum AudioDevice {
-            /*
-             * Bluetooth headset
-             * */
-            BLUETOOTH = "Bluetooth",
-            /*
-             * Earpiece
-             * */
-            EARPIECE = "Earpiece",
-            /*
-             * No audio device, generally indicates that something is wrong with audio device selection.
-             * Should not be selected via {$link AudioDeviceManager.selectAudioDevice}
-             * */
-            NONE = "None",
-            /*
-             * Speaker
-             * */
-            SPEAKER = "Speaker",
-            /*
-             * Wired headset
-             * */
-            WIRED_HEADSET = "WiredHeadset"
         }
 
         /*
