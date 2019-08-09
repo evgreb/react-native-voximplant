@@ -62,8 +62,96 @@ declare module "react-native-voximplant" {
         uber?: boolean;
     }
 
+
+    /*
+    * Interface that represents a conversation participant and its permissions.
+    * */
     export interface ConversationParticipant {
 
+        /*
+        * Specify if the participant can edit messages other than its own.
+        *
+        * It could be set only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants} permission.
+        *
+        * If the user that calls this method has both canManageParticipants and isOwner permissions, it can edit other owners.
+        * */
+        canEditAllMessages?: boolean;
+
+        /*
+        * Specify if the participant can edit its own messages in the conversation.
+        *
+        * The permission is given by default.
+        *
+        * It could be changed only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants} permission.
+        *
+        * If the user that calls this method has both canManageParticipants and owner permissions, it can edit other owners.
+        * */
+        canEditMessages?: boolean;
+
+        /*
+        * Specify if the conversation participant can manage other participants in the conversation:
+        *
+        * add, remove and edit permissions
+        * add and remove participants
+        * It could be set only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants} permission.
+        *
+        * If the user that calls this method has both canManageParticipants and isOwner permissions, it can edit other owners.
+        * */
+        canManageParticipants?: boolean;
+
+        /*
+        * Specify if the participant can remove messages other than its own.
+        *
+        * It could be changed only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants} permission.
+        *
+        * If the user that calls this method has both canManageParticipants and isOwner permissions, it can edit other owners.
+        * */
+        canRemoveAllMessages?: boolean;
+
+        /*
+        * Specify if the participant can remove its own messages in the conversation.
+        *
+        * The permission is given by default.
+        *
+        * It could be changed only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants} permission.
+        *
+        * If the user that calls this method has both canManageParticipants and isOwner permissions, it can edit other owners.
+        * */
+        canRemoveMessages?: boolean;
+
+        /*
+        * Specify if the participant can write in the conversation.
+        *
+        * The permission is given by default.
+        *
+        * It could be changed only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants} permission.
+        * */
+        canWrite?: boolean;
+
+        /*
+        * IM User id
+        * */
+        imUserId: number;
+
+        /*
+        * Sequence of the event that was last marked as read or 0, if the participant didn't mark events as read.
+        *
+        * Participants mark events as read via {@link Conversation.markAsRead}.
+        * */
+        lastReadEventSequence?: number;
+
+        /*
+        * Specify if the conversation participant is the owner.
+        *
+        * It could be set only if the user that calls this method has the {@link ConversationParticipant.canManageParticipants}
+        * and {@link ConversationParticipant.owner} permissions.
+        *
+        * There could be more than one owner in the conversation.
+        *
+        * If true, the participant can edit the conversation.
+        * If true and canManageParticipants is true, the participant can manage other owners.
+        * */
+        owner?: boolean;
     }
 
     namespace Voximplant {
