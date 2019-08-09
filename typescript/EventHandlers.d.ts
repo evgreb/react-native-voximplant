@@ -655,4 +655,26 @@ declare module "react-native-voximplant" {
         * */
         to: number
     }
+    export interface StatusEvent {
+
+        /*
+        * Action that triggered this event.
+        * */
+        action: Voximplant.MessengerAction,
+
+        /*
+        * Messenger event type.
+        * */
+        eventType: Voximplant.MessengerEventTypes,
+
+        /*
+        * The IM id for the user that initiated the event.
+        * */
+        imUserId: number,
+
+        /*
+        * The user status.
+        * */
+        online: boolean
+    }
 }
