@@ -1,6 +1,7 @@
 /// <reference path="Interfaces.d.ts" />
 /// <reference path="Call.d.ts" />
 /// <reference path="Conversation.d.ts" />
+/// <reference path="Enums.d.ts" />
 declare module "react-native-voximplant" {
     export interface AuthResult {
 
@@ -224,5 +225,33 @@ declare module "react-native-voximplant" {
         * */
         imUserId: number
 
+    }
+    export interface ConversationServiceEvent {
+
+        /*
+        * Action that triggered this event.
+        * */
+        action: Voximplant.MessengerAction,
+
+        /*
+        * The conversation UUID associated with this event.
+        * */
+        conversationUUID: string,
+
+        /*
+        * Messenger event type.
+        * */
+        eventType: Voximplant.MessengerEventTypes,
+
+        /*
+        * The IM id for the user that initiated the event.
+        * */
+        imUserId: number,
+
+        /*
+        * The sequence number of the event that was marked as read by the user initiated this event.
+        * Only available for {@link MessengerEventTypes.Read}.
+        * */
+        sequence: number
     }
 }
