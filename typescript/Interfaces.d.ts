@@ -15,7 +15,7 @@ declare module "react-native-voximplant" {
      * Parameter names must start with "X-" to be processed.
      * @remarks Headers size limit is 200 bytes
      * */
-    extraHeaders?: boolean;
+    extraHeaders?: object;
     /*
      * Preferred video codec for a particular call that this CallSettings are applied to.
      * @default {@link VideoCodec.AUTO}
