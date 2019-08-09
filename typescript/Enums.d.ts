@@ -543,6 +543,19 @@ declare module "react-native-voximplant" {
             SCALE_FIT = "fit"
         }
 
+        /*
+         * Request audio focus modes.
+         * */
+        export enum RequestAudioFocusMode {
+            /*
+             * Request of audio focus is performed when a call is established.
+             * */
+            REQUEST_ON_CALL_START = "REQUEST_ON_CALL_START",
+            /*
+             * Request of audio focus is performed when a call is started.
+             * */
+            REQUEST_ON_CALL_CONNECTED = "REQUEST_ON_CALL_CONNECTED"
+        }
 
         /*
          * Enum representing supported video codecs
@@ -560,20 +573,6 @@ declare module "react-native-voximplant" {
              * VP8 video codec
              * */
             AUTO = "AUTO"
-        }
-
-        /*
-         * Request audio focus modes.
-         * */
-        export enum RequestAudioFocusMode {
-            /*
-             * Request of audio focus is performed when a call is established.
-             * */
-            REQUEST_ON_CALL_START = "REQUEST_ON_CALL_START",
-            /*
-             * Request of audio focus is performed when a call is started.
-             * */
-            REQUEST_ON_CALL_CONNECTED = "REQUEST_ON_CALL_CONNECTED"
         }
     }
 }
