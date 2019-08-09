@@ -206,8 +206,30 @@ declare module "react-native-voximplant" {
 
     namespace Voximplant {
         namespace Messaging {
-            export class Conversation {} //TODO realise class
 
+            type MessengerEventTypesMaps = {
+                [MessengerEventTypes.CreateConversation]: ConversationEvent,
+                [MessengerEventTypes.EditConversation]: ConversationEvent,
+                [MessengerEventTypes.EditMessage]: MessageEvent,
+                [MessengerEventTypes.EditUser]: UserEvent,
+                // [MessengerEventTypes.Error]: void, // Subscription to this event via Messenger.on will never cause the execution of the specified handler function.
+                // [MessengerEventTypes.GetConversation]: void,
+                // [MessengerEventTypes.GetPublicConversations]: void,
+                // [MessengerEventTypes.GetSubscriptions]: void,
+                // [MessengerEventTypes.GetUser]: void,
+                [MessengerEventTypes.Read]: ConversationServiceEvent,
+                [MessengerEventTypes.RemoveConversation]: ConversationEvent,
+                [MessengerEventTypes.RemoveMessage]: MessageEvent,
+                // [MessengerEventTypes.RetransmitEvents]: void,
+                [MessengerEventTypes.SendMessage]: MessageEvent,
+                [MessengerEventTypes.SetStatus]: UserEvent,
+                [MessengerEventTypes.Subscribe]: SubscriptionEvent,
+                [MessengerEventTypes.Typing]: ConversationServiceEvent,
+                [MessengerEventTypes.Unsubscribe]: SubscriptionEvent,
+            }
+
+            export class Conversation {
+            } //TODO realise class
 
             /*
             * Interface that represents a message within a conversation.
@@ -250,7 +272,7 @@ declare module "react-native-voximplant" {
                 * the message removing via the {@link Voximplant.Messaging.MessengerEventTypes.RemoveMessage} event.
                 *
                 * */
-                remove(): Promise<MessageEvent|ErrorEvent>;
+                remove(): Promise<MessageEvent | ErrorEvent>;
 
                 /*
                 * Send text and payload changes to the cloud.
@@ -268,10 +290,233 @@ declare module "react-native-voximplant" {
                 * @param {string} text - New text of this message, maximum 5000 characters. If null, message text will not be updated.
                 * @param {Array<object>} payload - New payload of this message. If null, message payload will not be updated.
                 * */
-                update(text: string, payload: Array<object>): Promise<MessageEvent|ErrorEvent>
+                update(text: string, payload: Array<object>): Promise<MessageEvent | ErrorEvent>
             }
 
-            export class Messenger {} //TODO realise
+
+            /*
+            * Messenger class used to control messaging functions.
+            * */
+            export class Messenger {
+
+                /**
+                 * Create a new conversation with the extended configuration.
+                 *
+                 * Other parties of the conversation (online participants and logged in clients) can be informed about
+                 * the conversation creation via the {@link Voximplant.Messaging.MessengerEventTypes.CreateConversation}.
+                 *
+                 * @param {Voximplant.Messaging.ConversationConfig} [conversationConfig] - ConversationConfig instance with extended conversation parameters
+                 */
+                createConversation(conversationConfig: ConversationConfig): Promise<ConversationEvent | ErrorEvent>;
+
+                /**
+                 * Edit current user information.
+                 *
+                 * Other users that are subscribed to the user can be informed about the editing via the
+                 * {@link Voximplant.Messaging.MessengerEventTypes.EditUser} event.
+                 *
+                 * @param {object} customData - New custom data.
+                 * If null, previously set custom data will not be changed. If empty object, previously set custom data will be removed.
+                 * @param {object} privateCustomData - New private custom data.
+                 * If null, previously set private custom data will not be changed. If empty object, previously set private custom data will be removed.
+                 */
+                editUser(customData: object, privateCustomData: object): Promise<UserEvent | ErrorEvent>;
+
+                /**
+                 * Get a conversation by its UUID.
+                 *
+                 * It's possible if:
+                 * - the user that calls the method is/was a participant of this conversation
+                 * - the conversation is an available public conversation (see {@link Voximplant.Messaging.Messenger#getPublicConversations})
+                 *
+                 * Only the client that called the method can be informed about getting conversation.
+                 *
+                 * @param {string} uuid - Conversation UUID
+                 */
+                getConversation(uuid: string): Promise<ConversationEvent | ErrorEvent>;
+
+                /**
+                 * Get the multiple conversations by the list of UUIDs. Maximum 30 conversations.
+                 *
+                 * It's possible if:
+                 * - the user that calls the method is/was a participant of this conversation
+                 * - the conversation is an available public conversation (see {@link Voximplant.Messaging.Messenger#getPublicConversations})
+                 *
+                 * Only the client that called the method can be informed about getting conversations.
+                 *
+                 * @param {Array<string>} uuids - Array of UUIDs. Maximum 30 conversations.
+                 */
+                getConversations(uuids: Array<string>): Promise<Array<ConversationEvent> | ErrorEvent>;
+
+                /**
+                 * Get the full Voximplant user identifier, for example 'username@appname.accname', for the current user
+                 */
+                getMe(): string;
+
+                /**
+                 * Get all public conversations ({@link Voximplant.Messaging.Conversation#publicJoin} is true).
+                 *
+                 * It's possible to get all public conversations (UUIDs) that were created by:
+                 * - the current user
+                 * - other users of the same child account
+                 * - users of the main Voximplant developer account
+                 *
+                 * Only the client that called the method can be informed about getting public conversations UUIDs.
+                 */
+                getPublicConversations(): Promise<ConversationListEvent | ErrorEvent>;
+
+                /**
+                 * Get all current subscriptions, i.e., the array of users the current user is subscribed to.
+                 *
+                 * Only the client that called the method can be informed about getting subscriptions.
+                 */
+                getSubscriptions(): Promise<SubscriptionEvent | ErrorEvent>;
+
+                /**
+                 * Get information for the user specified by the IM user id.
+                 *
+                 * It's possible to get any user of the main Voximplant developer account or its child accounts.
+                 *
+                 * Only the client that called the method can be informed about getting user information.
+                 *
+                 * @param {number} userId -  IM User id
+                 */
+                getUserByIMId(userId: number): Promise<UserEvent | ErrorEvent>;
+
+                /**
+                 * Get information for the user specified by the Voximplant user name, e.g., 'username@appname.accname'.
+                 *
+                 * It's possible to get any user of the main Voximplant developer account or its child accounts.
+                 *
+                 * Only the client that called the method can be informed about getting user information.
+                 *
+                 * @param {string} username - Voximplant user identifier
+                 */
+                getUserByName(username: string): Promise<UserEvent | ErrorEvent>;
+
+                /**
+                 * Get information for the users specified by the array of the IM user ids. Maximum 50 users.
+                 *
+                 * It's possible to get any users of the main Voximplant developer account or its child accounts.
+                 *
+                 * Only the client that called the method can be informed about getting users information.
+                 * @param {Array<number>} users - Array of IM user ids
+                 */
+                getUsersByIMId(users: Array<number>): Promise<Array<UserEvent> | ErrorEvent>;
+
+                /**
+                 * Get information for the users specified by the array of the Voximplant user names. Maximum 50 users.
+                 *
+                 * It's possible to get any users of the main Voximplant developer account or its child accounts.
+                 *
+                 * Only the client that called the method can be informed about getting users information.
+                 *
+                 * @param {Array<string>} users - Array of Voximplant user identifiers
+                 */
+                getUsersByName(users: Array<string>): Promise<Array<UserEvent> | ErrorEvent>;
+
+                /**
+                 * Join the current user to any conversation specified by the UUID.
+                 *
+                 * It's possible only on the following conditions:
+                 * - a conversation is created by a user of the main Voximplant developer account or its child accounts
+                 * - public join is enabled ({@link Voximplant.Messaging.Conversation#publicJoin} is true)
+                 * - the conversation is not a direct one ({@link Voximplant.Messaging.Conversation#direct} is false)
+                 *
+                 * Other parties of the conversation (online participants and logged in clients) can be informed
+                 * about joining to the conversation via the {@link Voximplant.Messaging.MessengerEventTypes.EditConversation} event.
+                 *
+                 * @param {string} uuid - Conversation UUID
+                 */
+                joinConversation(uuid: string): Promise<ConversationListEvent | ErrorEvent>;
+
+                /**
+                 * Make the current user leave a conversation specified by the UUID.
+                 *
+                 * It's possible only if the conversation is not a direct one ({@link Voximplant.Messaging.Conversation#direct} is false).
+                 *
+                 * After a successful method call the conversation's UUID will be added to {@link Voximplant.Messaging.User#leaveConversationList}.
+                 *
+                 * Other parties of the conversation (online participants and logged in clients) can be informed
+                 * about leaving the conversation via the {@link Voximplant.Messaging.MessengerEventTypes.EditConversation} event.
+                 *
+                 * @param {string} uuid - Conversation UUID
+                 */
+                leaveConversation(uuid: string): Promise<ConversationListEvent | ErrorEvent>;
+
+                /**
+                 * Manage messenger push notification subscriptions for the current user.
+                 *
+                 * Other logged in clients (of the current user) can be informed about managing push notifications via
+                 * {@link Voximplant.Messaging.MessengerEventTypes.EditUser}
+                 *
+                 * @param {Array<Voximplant.Messaging.MessengerNotification>} notifications - Array of messenger notification types
+                 */
+                managePushNotifications(notifications: Array<MessengerNotification>): Promise<UserEvent | ErrorEvent>;
+
+                /**
+                 * Remove handler for specified event
+                 *
+                 * @param {Voximplant.Messaging.MessengerEventTypes} eventType
+                 * @param {function} handler - Handler function. If not specified, all handlers for the event type will be removed.
+                 */
+                off<T extends keyof MessengerEventTypes>(eventType: T, handler: (event: MessengerEventTypes[T]) => void): void;
+
+                /**
+                 * Register handler for specified messenger event.
+                 * Use {@link Voximplant.Messaging.Messenger.off} method to delete a handler.
+                 *
+                 * @param {Voximplant.Messaging.MessengerEventTypes} eventType
+                 * @param {function} handler
+                 */
+                on<T extends keyof MessengerEventTypes>(eventType: T, handler: (event: MessengerEventTypes[T]) => void): void;
+
+                /**
+                 * Set the current user status.
+                 *
+                 * Other users (that are subscribed to the user) and other clients (of the current user) can be informed about
+                 * the status changing via the {@link Voximplant.Messaging.MessengerEventTypes.SetStatus} event.
+                 *
+                 * @param {boolean} online - True if user is available for messaging, false otherwise
+                 */
+                setStatus(online: boolean): Promise<StatusEvent | ErrorEvent>;
+
+                /**
+                 * Subscribe for other user(s) information and status changes.
+                 *
+                 * It's possible to subscribe for any user of the main Voximplant developer account or its child accounts.
+                 *
+                 * Other logged in clients (of the current user) can be informed about the subscription via
+                 * the {@link Voximplant.Messaging.MessengerEventTypes.Subscribe} event.
+                 *
+                 * User(s) specified in the 'users' parameter aren't informed about the subscription.
+                 *
+                 * @param {Array<number>} users - Array of IM user ids
+                 */
+                subscribe(users: Array<number>): Promise<SubscriptionEvent | ErrorEvent>;
+
+                /**
+                 * Unsubscribe from other user(s) information and status changes.
+                 *
+                 * Other logged in clients (of the current user) can be informed about the unsubscription via
+                 * the {@link Voximplant.Messaging.MessengerEventTypes.Unsubscribe} event.
+                 *
+                 * User(s) specified in the 'users' parameter aren't informed about the unsubscription.
+                 *
+                 * @param {Array<number>} users - Array of IM user ids
+                 */
+                unsubscribe(users: Array<number>): Promise<SubscriptionEvent | ErrorEvent>;
+
+                /**
+                 * Unsubscribe from all subscriptions.
+                 *
+                 * Other logged in clients (of the current user) can be informed about the unsubscription via
+                 * the {@link Voximplant.Messaging.MessengerEventTypes.Unsubscribe} event.
+                 *
+                 * Other users aren't informed about the unsubscription.
+                 */
+                unsubscribeFromAll(): Promise<SubscriptionEvent | ErrorEvent>;
+            }
 
             /*
             * Enum that represents actions that trigger messenger events. Each action is the reason for every triggered event.
