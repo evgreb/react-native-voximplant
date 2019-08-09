@@ -43,7 +43,7 @@ declare module "react-native-voximplant" {
          * @param {string} number - The number to call. For SIP compatibility reasons it should be a non-empty string even if the number itself is not used by a Voximplant cloud scenario.
          * @param {Voximplant.CallSettings} [callSettings] - Optional call settings
          */
-        call(number: string, callSettings: CallSettings): Promise<Voximplant.Call>;
+        call(number: string, callSettings?: CallSettings): Promise<Voximplant.Call>;
 
         /**
          * Create call to a dedicated conference without proxy session. For details see [the video conferencing guide](https://voximplant.com/blog/video-conference-through-voximplant-media-servers).
@@ -57,13 +57,13 @@ declare module "react-native-voximplant" {
          * @param {string} number - The number to call. For SIP compatibility reasons it should be a non-empty string even if the number itself is not used by a Voximplant cloud scenario.
          * @param {Voximplant.CallSettings} [callSettings] - Optional call settings
          */
-        callConference(number: string, callSettings: CallSettings): Promise<Voximplant.Call>;
+        callConference(number: string, callSettings?: CallSettings): Promise<Voximplant.Call>;
 
         /**
          * Connect to the Voximplant Cloud
          * @param {Voximplant.ConnectOptions} [options] - Connection options
          */
-        connect(options: ConnectOptions): Promise<ConnectionEstablished|ConnectionFailed>;
+        connect(options?: ConnectOptions): Promise<ConnectionEstablished|ConnectionFailed>;
 
         /**
          * Disconnect from the Voximplant Cloud
