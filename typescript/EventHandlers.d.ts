@@ -157,4 +157,16 @@ declare module "react-native-voximplant" {
         * */
         name: string
     }
+    export interface ConnectionFailed {
+
+        /*
+        * Failure reason description
+        * */
+        message: string,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
