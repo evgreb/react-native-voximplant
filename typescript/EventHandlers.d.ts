@@ -495,4 +495,21 @@ declare module "react-native-voximplant" {
         * */
         videoStream: Voximplant.VideoStream,
     }
+    export interface LocalVideoStreamRemoved {
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Name of the event
+        * */
+        name: string,
+
+        /*
+        * Local video stream
+        * */
+        videoStream: Voximplant.VideoStream,
+    }
 }
