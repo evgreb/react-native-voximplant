@@ -2,6 +2,7 @@
 /// <reference path="Call.d.ts" />
 /// <reference path="Conversation.d.ts" />
 /// <reference path="Enums.d.ts" />
+/// <reference path="VideoStream.d.ts" />
 declare module "react-native-voximplant" {
     export interface AuthResult {
 
@@ -476,5 +477,22 @@ declare module "react-native-voximplant" {
         * */
         name: string
 
+    }
+    export interface LocalVideoStreamAdded {
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Name of the event
+        * */
+        name: string,
+
+        /*
+        * Local video stream
+        * */
+        videoStream: Voximplant.VideoStream,
     }
 }
