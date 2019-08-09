@@ -3,6 +3,8 @@
 /// <reference path="Conversation.d.ts" />
 /// <reference path="Enums.d.ts" />
 /// <reference path="VideoStream.d.ts" />
+/// <reference path="Messaging.d.ts" />
+
 declare module "react-native-voximplant" {
     export interface AuthResult {
 
@@ -177,17 +179,17 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Object with conversation information
         * */
-        conversation: Messaging.Conversation, //TODO realise class Conversation
+        conversation: Voximplant.Messaging.Conversation, //TODO realise class Conversation
 
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -209,7 +211,7 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Array of conversations UUIDs.
@@ -219,7 +221,7 @@ declare module "react-native-voximplant" {
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -232,7 +234,7 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * The conversation UUID associated with this event.
@@ -242,7 +244,7 @@ declare module "react-native-voximplant" {
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -260,7 +262,7 @@ declare module "react-native-voximplant" {
         /*
         * Audio device to be used
         * */
-        currentDevice: Voximplant.AudioDevice,
+        currentDevice: Voximplant.Hardware.AudioDevice,
 
         /*
         * Name of the event
@@ -277,7 +279,7 @@ declare module "react-native-voximplant" {
         /*
         * List of currently available audio devices.
         * */
-        newDeviceList: Voximplant.AudioDevice[]
+        newDeviceList: Voximplant.Hardware.AudioDevice[]
     }
     export interface Disconnected {
 
@@ -327,7 +329,7 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Error code
@@ -381,7 +383,7 @@ declare module "react-native-voximplant" {
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes
+        eventType: Voximplant.Messaging.MessengerEventTypes
     }
     export interface Failed {
 
@@ -517,12 +519,12 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -532,7 +534,7 @@ declare module "react-native-voximplant" {
         /*
         * Message object.
         * */
-        message: Messaging.Message,
+        message: Voximplant.Messaging.Message,
 
         /*
         * The sequence number for this event.
@@ -628,12 +630,12 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The array of the event objects that were retransmitted ({@link ConversationEvent} or {@link MessageEvent}).
@@ -660,12 +662,12 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -682,12 +684,12 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -704,12 +706,12 @@ declare module "react-native-voximplant" {
         /*
         * Action that triggered this event.
         * */
-        action: Voximplant.MessengerAction,
+        action: Voximplant.Messaging.MessengerAction,
 
         /*
         * Messenger event type.
         * */
-        eventType: Voximplant.MessengerEventTypes,
+        eventType: Voximplant.Messaging.MessengerEventTypes,
 
         /*
         * The IM id for the user that initiated the event.
@@ -719,6 +721,6 @@ declare module "react-native-voximplant" {
         /*
         * Object with user information
         * */
-        user: Messaging.User
+        user: Voximplant.Messaging.User
     }
 }
