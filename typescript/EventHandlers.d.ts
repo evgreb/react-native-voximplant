@@ -184,7 +184,7 @@ declare module "react-native-voximplant" {
         /*
         * Object with conversation information
         * */
-        conversation: Voximplant.Messaging.Conversation, //TODO realise class Conversation
+        conversation: Voximplant.Messaging.Conversation,
 
         /*
         * Messenger event type.
