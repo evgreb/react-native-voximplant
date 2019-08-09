@@ -1,6 +1,5 @@
 /// <reference path="Interfaces.d.ts" />
 /// <reference path="Call.d.ts" />
-/// <reference path="Conversation.d.ts" />
 /// <reference path="Enums.d.ts" />
 /// <reference path="VideoStream.d.ts" />
 /// <reference path="Messaging.d.ts" />

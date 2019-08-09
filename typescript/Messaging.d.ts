@@ -1,6 +1,76 @@
 declare module "react-native-voximplant" {
+
+    /*
+    * Configuration either to create a new conversation or restore a previously created conversation.
+    * */
+    export interface ConversationConfig {
+
+        /*
+        * Custom data of the conversation.
+        * @remarks (up to 5kb)
+        * */
+        customData?: object;
+
+        /*
+        * Set if the conversation is direct.
+        *
+        * There can be only 2 participants in a direct conversation which is unique and the only one for these participants.
+        * There can't be more than 1 direct conversation for the same 2 users.
+        *
+        * If one of these users tries to create a new direct conversation with the same participant via {@link Messenger.createConversation}, the method will return the UUID of the already existing direct conversation.
+        *
+        * A direct conversation can't be uber and/or public.
+        * */
+        direct?: boolean;
+
+        /*
+        * Set the conversation participants.
+        *
+        * The participants array can be later changed via:
+        *
+        * {@link Conversation.addParticipants}
+        * {@link Conversation.removeParticipants}
+        * */
+        participants?: Array<ConversationParticipant>;
+
+        /*
+        * Set the conversation to be public or not.
+        *
+        * It can be later changed via Conversation.publicJoin.
+        *
+        * If true, any user can join the conversation via Messenger.joinConversation by specifying its UUID.
+        * Use the {@link Messenger.getPublicConversations} method to retrieve all public conversations' UUIDs.
+        *
+        * A public conversation can't be direct.
+        * */
+        publicJoin?: boolean;
+
+        /*
+        * Set the conversation title.
+        *
+        * It can be later changed via {@link Conversation.title}.
+        * */
+        title?: string;
+
+        /*
+        * Set if the conversation is a uber conversation.
+        *
+        * Users in a uber conversation will not be able to retrieve messages that were posted to the conversation after they quit.
+        *
+        * A uber conversation can't be direct.
+        * */
+        uber?: boolean;
+    }
+
+    export interface ConversationParticipant {
+
+    }
+
     namespace Voximplant {
         namespace Messaging {
+            export class Conversation{} //TODO realise class
+            export class Message{} //TODO realise
+
             /*
             * Enum that represents actions that trigger messenger events. Each action is the reason for every triggered event.
             * */
