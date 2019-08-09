@@ -62,7 +62,6 @@ declare module "react-native-voximplant" {
         uber?: boolean;
     }
 
-
     /*
     * Interface that represents a conversation participant and its permissions.
     * */
@@ -152,6 +151,58 @@ declare module "react-native-voximplant" {
         * If true and canManageParticipants is true, the participant can manage other owners.
         * */
         owner?: boolean;
+    }
+
+
+    /*
+    * Interface that represents user information. Voximplant users are created via the Voximplant control panel or HTTP API.
+    * */
+    export interface User {
+
+        /*
+        * Array of UUIDs for the conversations the user currently belongs to. Only available if user queries information about himself.
+        * */
+        conversationList: string[],
+
+        /*
+        * JavaScript object with public custom data, available to all users
+        * */
+        customData: object,
+
+        /*
+        * User's display name which is specified during user creation. The display name is available to all users.
+        * */
+        displayName: string,
+
+        /*
+        * IM unique id that is used to identify users in events and specify in user-related methods
+        * */
+        imId: number,
+
+        /*
+        * Check if the user is deleted or not
+        * */
+        isDeleted: boolean,
+
+        /*
+        * Array of UUIDs for uber conversations that user was joined, but currently is not participating in.
+        * */
+        leaveConversationList: string[],
+
+        /*
+        * Voximplant user identifier, for example 'username@appname.accname'
+        * */
+        name: string,
+
+        /*
+        * Array of messenger notifications that current user is subscribed to
+        * */
+        notifications: string[],
+
+        /*
+        * JavaScript object with private custom data, available only to the user himself
+        * */
+        privateCustomData: object
     }
 
     namespace Voximplant {
