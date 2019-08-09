@@ -512,4 +512,36 @@ declare module "react-native-voximplant" {
         * */
         videoStream: Voximplant.VideoStream,
     }
+    export interface MessageEvent {
+
+        /*
+        * Action that triggered this event.
+        * */
+        action: Voximplant.MessengerAction,
+
+        /*
+        * Messenger event type.
+        * */
+        eventType: Voximplant.MessengerEventTypes,
+
+        /*
+        * The IM id for the user that initiated the event.
+        * */
+        imUserId: number,
+
+        /*
+        * Message object.
+        * */
+        message: Messaging.Message,
+
+        /*
+        * The sequence number for this event.
+        * */
+        sequence: number,
+
+        /*
+        * The UNIX timestamp (seconds) that specifies the time the message event was provoked.
+        * */
+        timestamp: number
+    }
 }
