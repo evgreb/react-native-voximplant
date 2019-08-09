@@ -382,4 +382,31 @@ declare module "react-native-voximplant" {
         * */
         eventType: Voximplant.MessengerEventTypes
     }
+    export interface Failed {
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Call status code
+        * */
+        code: number,
+
+        /*
+        * Optional SIP headers are received with the event
+        * */
+        headers: object,
+
+        /*
+        * Name of the event
+        * */
+        name: string,
+
+        /*
+        * Status message of a call failure (i.e. Busy Here)
+        * */
+        reason: string
+    }
 }
