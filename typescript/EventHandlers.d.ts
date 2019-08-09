@@ -409,4 +409,27 @@ declare module "react-native-voximplant" {
         * */
         reason: string
     }
+    export interface IncomingCall {
+
+        /*
+        * Incoming call instance.
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Optional SIP headers received with the event
+        * */
+        headers: object,
+
+        /*
+        * Name of the event
+        * */
+        name: string,
+
+        /*
+        * True if the caller initiated video call
+        * */
+        video: boolean
+
+    }
 }
