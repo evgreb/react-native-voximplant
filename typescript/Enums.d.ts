@@ -145,7 +145,7 @@ declare module "react-native-voximplant" {
              *
              * Handler function receives {@link Voximplant.EventHandlers.ConversationEvent} object as an argument.
              */
-            EditConversation= 'EditConversation',
+            EditConversation = 'EditConversation',
             /**
              * Event is triggered when a message was edited via {@link Voximplant.Messaging.Message#update} or analogous methods
              * from other Voximplant SDKs and Messaging API.
@@ -154,7 +154,7 @@ declare module "react-native-voximplant" {
              *
              * Handler function receives {@link Voximplant.EventHandlers.MessageEvent} object as an argument.
              */
-            EditMessage= 'EditMessage',
+            EditMessage = 'EditMessage',
             /**
              * Event is triggered as the result of {@link Voximplant.Messaging.Messenger#editUser} or analogous methods from other Voximplant SDKs and Messaging API.
              *
@@ -286,6 +286,98 @@ declare module "react-native-voximplant" {
             Unsubscribe = 'Unsubscribe'
         }
 
+        /*
+* Enum that represents events available for push notification subscriptions.
+* */
+        export enum MessengerNotification {
+            EditMessage = "EditMessage",
+            SendMessage = "SendMessage"
+        }
+
+        /*
+ * Call related errors
+ * */
+        export enum CallError {
+            /*
+             * The call is already in requested state
+             * */
+            ALREADY_IN_THIS_STATE = "ALREADY_IN_THIS_STATE",
+            /*
+             * Requested functionality is disabled
+             * */
+            FUNCTIONALITY_IS_DISABLED = "FUNCTIONALITY_IS_DISABLED",
+            /*
+             * Operation is incorrect, for example reject outgoing call
+             * */
+            INCORRECT_OPERATION = "INCORRECT_OPERATION",
+            /*
+             * Internal error occurred
+             * */
+            INTERNAL_ERROR = "INTERNAL_ERROR",
+            /*
+             * Operation can't be performed due to the call is on hold. Unhold the call and repeat the operation
+             * */
+            MEDIA_IS_ON_HOLD = "MEDIA_IS_ON_HOLD",
+            /*
+             * Operation can't be performed due to missing permission
+             * */
+            MISSING_PERMISSION = "MISSING_PERMISSION",
+            /*
+             * Operation can't be performed due to the client is not logged in
+             * */
+            NOT_LOGGED_IN = "NOT_LOGGED_IN",
+            /*
+             * Operation is rejected
+             * */
+            REJECTED = "REJECTED",
+            /*
+             * Operation is not completed in time
+             * */
+            TIMEOUT = "TIMEOUT"
+        }
+
+        /**
+         * The events that are triggered by Client instance. See {@link Voximplant#getInstance}.
+         */
+        export enum ClientEvents {
+            /**
+             * The event is triggered after connection to the Voximplant Cloud was established successfully.
+             * See {@link Client#connect} method.
+             * Handler function receives no arguments.
+             */
+            ConnectionEstablished = 'ConnectionEstablished',
+            /**
+             * The event is triggered if a connection to the Voximplant Cloud couldn't be established.
+             * See {@link Client#connect} method.
+             * Handler function receives {@link EventHandlers.ConnectionFailed} object as an argument.
+             */
+            ConnectionFailed = 'ConnectionFailed',
+            /**
+             * The event is triggered if a connection to the Voximplant Cloud was closed because of network problems.
+             * See {@link Client#connect} method.
+             * Handler function receives no arguments.
+             */
+            ConnectionClosed = 'ConnectionClosed',
+            /**
+             * Event is triggered after
+             * {@link Client#login},
+             * {@link Client#loginWithOneTimeKey},
+             * {@link Client#requestOneTimeLoginKey},
+             * {@link Client#loginWithToken} methods.
+             * Handler function receives {@link EventHandlers.AuthResult} object as an argument.
+             */
+            AuthResult = 'AuthResult',
+            /**
+             * The event is triggered after the {@link Client#tokenRefresh} method call.
+             * Handler function receives {@link EventHandlers.AuthTokenResult} object as an argument.
+             */
+            RefreshTokenResult = 'RefreshTokenResult',
+            /**
+             * The event is triggered when there is a new incoming call to current user.
+             * Handler function receives {@link EventHandlers.IncomingCall} object as an argument.
+             */
+            IncomingCall = 'IncomingCall'
+        }
 
         /*
          * Enum of log levels.
@@ -357,47 +449,6 @@ declare module "react-native-voximplant" {
             SCALE_FIT = "fit"
         }
 
-        /*
-         * Call related errors
-         * */
-        export enum CallError {
-            /*
-             * The call is already in requested state
-             * */
-            ALREADY_IN_THIS_STATE = "ALREADY_IN_THIS_STATE",
-            /*
-             * Requested functionality is disabled
-             * */
-            FUNCTIONALITY_IS_DISABLED = "FUNCTIONALITY_IS_DISABLED",
-            /*
-             * Operation is incorrect, for example reject outgoing call
-             * */
-            INCORRECT_OPERATION = "INCORRECT_OPERATION",
-            /*
-             * Internal error occurred
-             * */
-            INTERNAL_ERROR = "INTERNAL_ERROR",
-            /*
-             * Operation can't be performed due to the call is on hold. Unhold the call and repeat the operation
-             * */
-            MEDIA_IS_ON_HOLD = "MEDIA_IS_ON_HOLD",
-            /*
-             * Operation can't be performed due to missing permission
-             * */
-            MISSING_PERMISSION = "MISSING_PERMISSION",
-            /*
-             * Operation can't be performed due to the client is not logged in
-             * */
-            NOT_LOGGED_IN = "NOT_LOGGED_IN",
-            /*
-             * Operation is rejected
-             * */
-            REJECTED = "REJECTED",
-            /*
-             * Operation is not completed in time
-             * */
-            TIMEOUT = "TIMEOUT"
-        }
 
         /*
          * Enum representing supported video codecs
@@ -429,14 +480,6 @@ declare module "react-native-voximplant" {
              * Request of audio focus is performed when a call is started.
              * */
             REQUEST_ON_CALL_CONNECTED = "REQUEST_ON_CALL_CONNECTED"
-        }
-
-        /*
-        * Enum that represents events available for push notification subscriptions.
-        * */
-        export enum MessengerNotification {
-            EditMessage = "EditMessage",
-            SendMessage = "SendMessage"
         }
     }
 }
