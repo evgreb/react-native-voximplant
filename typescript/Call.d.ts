@@ -3,6 +3,20 @@
 /// <reference path="EventHandlers.d.ts" />
 declare module "react-native-voximplant" {
     namespace Voximplant {
+        type CallEventsMap = {
+            [Voximplant.CallEvents.Connected]: CallEventWithHeaders,
+            [Voximplant.CallEvents.Disconnected]: Disconnected,
+            [Voximplant.CallEvents.EndpointAdded]: EndpointAdded,
+            [Voximplant.CallEvents.Failed]:  Failed,
+            [Voximplant.CallEvents.ICECompleted]: CallEvent,
+            [Voximplant.CallEvents.ICETimeout]: CallEvent,
+            [Voximplant.CallEvents.InfoReceived]: InfoReceived,
+            [Voximplant.CallEvents.LocalVideoStreamAdded]: LocalVideoStreamAdded,
+            [Voximplant.CallEvents.LocalVideoStreamRemoved]: LocalVideoStreamRemoved,
+            [Voximplant.CallEvents.MessageReceived]: MessageReceived,
+            [Voximplant.CallEvents.ProgressToneStart]: CallEventWithHeaders,
+            [Voximplant.CallEvents.ProgressToneStop]: CallEvent,
+        }
 
         /*
         * Class that may be used for call operations like answer, reject, hang up abd mid-call operations like hold, start/stop video and others.
@@ -36,14 +50,14 @@ declare module "react-native-voximplant" {
              * Hold or unhold the call
              * @param {boolean} enable - True if the call should be put on hold, false for unhold
              */
-            hold(enable: boolean): Promise<void | CallOperationFailed>
+            hold(enable: boolean): Promise<void | CallOperationFailed>;
 
             /**
              * Remove a handler for the specified call event.
              * @param {@link Voximplant.CallEvents} event
              * @param {function} handler - Handler function. If not specified, all handlers for the event will be removed.
              */
-            off(event: CallEvents, handler: () => any): void //TODO add eventHandler
+            off<T extends keyof CallEventsMap>(event: T, handler: (event: CallEventsMap[T]) => void): void;
 
             /**
              * Register a handler for the specified call event.
@@ -52,12 +66,12 @@ declare module "react-native-voximplant" {
              * @param {@link Voximplant.CallEvents} event
              * @param {function} handler - Handler function. A single parameter is passed - object with event information
              */
-            on(event: CallEvents, handler: () => any): void //TODO add eventHandler
+            on<T extends keyof CallEventsMap>(event: T, handler: (event: CallEventsMap[T]) => void): void;
 
             /**
              * Start receive video if video receive was disabled before. Stop receiving video during the call is not supported.
              */
-            receiveVideo(): Promise<void|CallOperationFailed>
+            receiveVideo(): Promise<void|CallOperationFailed>;
 
             /**
              * Reject incoming call on the part of Web SDK.
@@ -107,7 +121,7 @@ declare module "react-native-voximplant" {
              * the {@link EndpointEvents#RemoteVideoStreamAdded} or {@link EndpointEvents#RemoteVideoStreamRemoved} event accordingly.
              * @param {boolean} enable - True if video should be sent, false otherwise
              */
-            sendVideo(enable: boolean): Promise<void|CallOperationFailed>
+            sendVideo(enable: boolean): Promise<void|CallOperationFailed>;
 
             /**
              * The call id
