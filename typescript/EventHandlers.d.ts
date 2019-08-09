@@ -28,5 +28,23 @@ declare module "react-native-voximplant" {
             * */
             tokens: LoginTokens
         }
+        export interface AuthTokenResult {
+            /*
+            * Error code
+            * */
+            code: number,
+            /*
+            * string name
+            * */
+            name: string,
+            /*
+            * True in case of success, false - otherwise
+            * */
+            result: boolean,
+            /*
+            * New tokens structure
+            * */
+            tokens: LoginTokens
+        }
     }
 }
