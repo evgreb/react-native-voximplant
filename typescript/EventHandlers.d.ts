@@ -1,5 +1,6 @@
 /// <reference path="Interfaces.d.ts" />
 /// <reference path="Call.d.ts" />
+/// <reference path="Conversation.d.ts" />
 declare module "react-native-voximplant" {
     export interface AuthResult {
 
@@ -168,5 +169,37 @@ declare module "react-native-voximplant" {
         * Name of the event
         * */
         name: string
+    }
+    export interface ConversationEvent {
+
+        /*
+        * Action that triggered this event.
+        * */
+        action: Voximplant.MessengerAction,
+
+        /*
+        * Object with conversation information
+        * */
+        conversation: Messaging.Conversation, //TODO realise class Conversation
+
+        /*
+        * Messenger event type.
+        * */
+        eventType: Voximplant.MessengerEventTypes,
+
+        /*
+        * The IM id for the user that initiated the event.
+        * */
+        imUserId: number,
+
+        /*
+        * Sequence number of this event
+        * */
+        sequence: number,
+
+        /*
+        * UNIX timestamp (seconds) that specifies the time the conversation event was provoked
+        * */
+        timestamp: number
     }
 }
