@@ -697,6 +697,6 @@ declare module "react-native-voximplant" {
         /*
         * Array of the IM user identifiers of the current (un)subscription.
         * */
-        users: nubmer[]
+        users: number[]
     }
 }
