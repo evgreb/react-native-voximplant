@@ -1,6 +1,98 @@
 declare module "react-native-voximplant" {
     namespace Voximplant {
         namespace Hardware {
+
+            type AudioDeviceEventsMap = {
+                [AudioDeviceEvents.DeviceChanged]: DeviceChanged,
+                [AudioDeviceEvents.DeviceListChanged]: DeviceListChanged
+            }
+
+            /**
+             * Class may be used to manage audio devices, i.e. see current active device,
+             * select another active device and get the list of available devices.
+             */
+            export class AudioDeviceManager {
+                /**
+                 *
+                 * Initialize AVAudioSession if the application uses CallKit.
+                 *
+                 * Should be called when:
+                 * 1. the provider performs [the specified start call action](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1648260-provider?language=objc)
+                 * 2. the provider performs [the specified answer call action](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1648270-provider?language=objc)
+                 * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
+                 */
+                callKitConfigureAudioSession(): void
+
+                /**
+                 *
+                 * Restores default AVAudioSession initialization routines, MUST be called if CallKit becomes disabled.
+                 * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
+                 */
+                callKitReleaseAudioSession(): void
+
+                /**
+                 *
+                 * Starts AVAudioSession.
+                 *
+                 * Should be called when:
+                 * 1. the provider’s audio session is [activated](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1833281-provider?language=objc)
+                 * 2. the provider performs [the specified set held call action](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1648256-provider?language=objc)
+                 *
+                 * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
+                 */
+                callKitStartAudio(): void
+
+                /**
+                 *
+                 * Stops AVAudioSession.
+                 *
+                 * Should be called when:
+                 * 1. the provider performs [the specified end call action](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1648264-provider?language=objc)
+                 * 2. the provider performs [the specified set held call action](https://developer.apple.com/documentation/callkit/cxproviderdelegate/1648256-provider?language=objc)
+                 *
+                 * @remarks IOS ONLY. Required for the correct CallKit integration only. Otherwise don't use this method.
+                 */
+                callKitStopAudio(): void
+
+                /**
+                 * Returns active audio device during the call or audio device that will be used for a call if there is no calls at this moment.
+                 */
+                getActiveDevice(): Promise<AudioDevice>
+
+                /**
+                 * Returns the list of available audio devices.
+                 */
+                getAudioDevices(): Promise<Array<AudioDevice>>
+
+                /**
+                 * Get AudioDeviceManager instance to control audio hardware settings
+                 */
+                getInstance(): AudioDeviceManager
+
+                /**
+                 * Remove a handler for the specified AudioDeviceManager event.
+                 * @param {Voximplant.Hardware.AudioDeviceEvents} event
+                 * @param {function} handler - Handler function. If not specified, all handlers for the event will be removed.
+                 */
+                off<T extends keyof AudioDeviceEventsMap>(event: T, handler: (event: AudioDeviceEventsMap[T]) => void): void
+
+                /**
+                 * Register a handler for the specified AudioDeviceManager event.
+                 * One event can have more than one handler.
+                 * Use the {@link Voximplant.Hardware.AudioDeviceManager#off} method to delete a handler.
+                 * @param {Voximplant.Hardware.AudioDeviceEvents} event
+                 * @param {function} handler
+                 */
+                on<T extends keyof AudioDeviceEventsMap>(event: T, handler: (event: AudioDeviceEventsMap[T]) => void): void
+
+                /**
+                 * Changes selection of the current active audio device. Please see {@link https://voximplant.com/docs/references/androidsdk/iaudiodevicemanager Android}
+                 * and {@link https://voximplant.com/docs/references/iossdk/viaudiomanager#selectaudiodevice iOS} documentation for platform specific.
+                 * @param {Voximplant.Hardware.AudioDevice} audioDevice - Preferred audio device to use.
+                 */
+                selectAudioDevice(audioDevice: AudioDevice): void
+            }
+
             /*
              * Enum representing audio devices
              * */
@@ -29,8 +121,8 @@ declare module "react-native-voximplant" {
             }
 
             /*
-    * Events that may be used to monitor and handle audio device change events
-    * */
+            * Events that may be used to monitor and handle audio device change events
+            * */
             export enum AudioDeviceEvents {
                 /**
                  * Event is triggered when active audio device or audio device that will be used for a further call is changed.
@@ -75,8 +167,8 @@ declare module "react-native-voximplant" {
             }
 
             /*
-    * Enum representing camera types
-    * */
+            * Enum representing camera types
+            * */
             export enum CameraType {
                 /*
                  * The facing of the camera is opposite to that of the screen
