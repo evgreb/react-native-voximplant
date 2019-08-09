@@ -1,5 +1,6 @@
 /// <reference path="Interfaces.d.ts" />
 /// <reference path="Endpoint.d.ts" />
+/// <reference path="EventHandlers.d.ts" />
 declare module "react-native-voximplant" {
     namespace Voximplant {
 
@@ -35,7 +36,7 @@ declare module "react-native-voximplant" {
              * Hold or unhold the call
              * @param {boolean} enable - True if the call should be put on hold, false for unhold
              */
-            hold(enable: boolean): Promise<void | CallOperationFailed> //TODO realise CallOperationFailed interface
+            hold(enable: boolean): Promise<void | CallOperationFailed>
 
             /**
              * Remove a handler for the specified call event.
@@ -56,7 +57,7 @@ declare module "react-native-voximplant" {
             /**
              * Start receive video if video receive was disabled before. Stop receiving video during the call is not supported.
              */
-            receiveVideo(): Promise<void|CallOperationFailed> //TODO realise CallOperationFailed interface
+            receiveVideo(): Promise<void|CallOperationFailed>
 
             /**
              * Reject incoming call on the part of Web SDK.
@@ -106,7 +107,7 @@ declare module "react-native-voximplant" {
              * the {@link EndpointEvents#RemoteVideoStreamAdded} or {@link EndpointEvents#RemoteVideoStreamRemoved} event accordingly.
              * @param {boolean} enable - True if video should be sent, false otherwise
              */
-            sendVideo(enable: boolean): Promise<void|CallOperationFailed> //TODO realise CallOperationFailed interface
+            sendVideo(enable: boolean): Promise<void|CallOperationFailed>
 
             /**
              * The call id
