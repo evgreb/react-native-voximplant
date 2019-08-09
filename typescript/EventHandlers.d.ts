@@ -623,4 +623,36 @@ declare module "react-native-voximplant" {
         * */
         name: string
     }
+    export interface RetransmitEvent {
+
+        /*
+        * Action that triggered this event.
+        * */
+        action: Voximplant.MessengerAction,
+
+        /*
+        * Messenger event type.
+        * */
+        eventType: Voximplant.MessengerEventTypes,
+
+        /*
+        * The array of the event objects that were retransmitted ({@link ConversationEvent} or {@link MessageEvent}).
+        * */
+        events: Array<MessageEvent & ConversationEvent>
+
+        /*
+        * The event sequence number from which the events were retransmitted.
+        * */
+        from: number,
+
+        /*
+        * The IM id for the user that initiated the event.
+        * */
+        imUserId: number,
+
+        /*
+        * The event sequence number to which the events were retransmitted.
+        * */
+        to: number
+    }
 }
