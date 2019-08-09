@@ -432,4 +432,31 @@ declare module "react-native-voximplant" {
         video: boolean
 
     }
+    export interface InfoReceived {
+
+        /*
+        * Content of the message
+        * */
+        body: string,
+
+        /*
+        * Call that triggered the event
+        * */
+        call: Voximplant.Call,
+
+        /*
+        * Optional SIP headers are received with the event
+        * */
+        headers: object,
+
+        /*
+        * MIME type of INFO message
+        * */
+        mimeType: string,
+
+        /*
+        * Name of the event
+        * */
+        name: string
+    }
 }
