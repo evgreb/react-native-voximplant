@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 
+def getExtOrIntegerDefault(name) {
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : 28
+}
+
 android {
-    compileSdkVersion 26
+    compileSdkVersion getExtOrIntegerDefault('compileSdkVersion')
 
     sourceSets {
         main {
@@ -11,7 +15,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion getExtOrIntegerDefault('targetSdkVersion')
         versionCode 1
         versionName "1.0"
     }
@@ -32,5 +36,5 @@ repositories {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"
-    implementation "com.voximplant:voximplant-sdk:2.11.3"
+    implementation "com.voximplant:voximplant-sdk:2.12.2"
 }
